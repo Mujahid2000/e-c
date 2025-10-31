@@ -15,7 +15,7 @@ interface ProductCardProps {
   inventory: number
 }
 
-export default function ProductCard({ slug, name, price, image, rating, reviews, inventory }: ProductCardProps) {
+export default function ProductCard({_id, slug, name, price, image, rating, reviews, inventory }: ProductCardProps) {
 
   console.log(image)
   return (
