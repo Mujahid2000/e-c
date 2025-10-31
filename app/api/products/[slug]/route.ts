@@ -4,12 +4,12 @@ import { Product } from "@/lib/product"
 import { type NextRequest, NextResponse } from "next/server"
 
 // GET /api/products/[slug] - Fetch a single product
-export async function GET(request: NextRequest, { params }: { params: Promise<{ _id: string }> }) {
+export async function GET(request: NextRequest, { params }: { params: Promise<{ slug: string }> }) {
   try {
     await dbConnect()
-    const { _id } = await params
+    const { slug } = await params
 
-    const product = await Product.findOne({ _id }).lean()
+    const product = await Product.findOne({ slug }).lean()
 
     if (!product) {
       return NextResponse.json({ success: false, error: "Product not found" }, { status: 404 })
@@ -23,7 +23,7 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
 }
 
 // PUT /api/products/[slug] - Update a product (Admin only)
-export async function PUT(request: NextRequest, { params }: { params: Promise<{ _id: string }> }) {
+export async function PUT(request: NextRequest, { params }: { params: Promise<{ slug: string }> }) {
   try {
     const adminKey = request.headers.get("x-admin-key")
     if (adminKey !== process.env.ADMIN_TOKEN) {
@@ -31,10 +31,10 @@ export async function PUT(request: NextRequest, { params }: { params: Promise<{ 
     }
 
     await dbConnect()
-    const { _id } = await params
+    const { slug } = await params
     const body = await request.json()
 
-    const product = await Product.findOneAndUpdate({ _id }, { ...body, lastUpdated: new Date() }, { new: true })
+    const product = await Product.findOneAndUpdate({ slug }, { ...body, lastUpdated: new Date() }, { new: true })
 
     if (!product) {
       return NextResponse.json({ success: false, error: "Product not found" }, { status: 404 })
@@ -48,7 +48,7 @@ export async function PUT(request: NextRequest, { params }: { params: Promise<{ 
 }
 
 // DELETE /api/products/[slug] - Delete a product (Admin only)
-export async function DELETE(request: NextRequest, { params }: { params: Promise<{ _id: string }> }) {
+export async function DELETE(request: NextRequest, { params }: { params: Promise<{ slug: string }> }) {
   try {
     const adminKey = request.headers.get("x-admin-key")
     if (adminKey !== process.env.ADMIN_TOKEN) {
@@ -56,9 +56,9 @@ export async function DELETE(request: NextRequest, { params }: { params: Promise
     }
 
     await dbConnect()
-    const { _id } = await params
+    const { slug } = await params
 
-    const product = await Product.findOneAndDelete({ _id })
+    const product = await Product.findOneAndDelete({ slug })
 
     if (!product) {
       return NextResponse.json({ success: false, error: "Product not found" }, { status: 404 })
