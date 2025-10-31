@@ -5,7 +5,7 @@ import { type NextRequest, NextResponse } from "next/server"
 export async function POST(request: NextRequest, { params }: { params: Promise<{ slug: string }> }) {
   try {
     const adminKey = request.headers.get("x-admin-key")
-    if (adminKey !== process.env.ADMIN_SECRET_KEY) {
+    if (adminKey !== process.env.ADMIN_TOKEN) {
       return NextResponse.json({ success: false, error: "Unauthorized" }, { status: 401 })
     }
 
