@@ -46,7 +46,7 @@ export default function ProductCard({_id, slug, name, price, image, rating, revi
             {[...Array(5)].map((_, i) => (
               <Star
                 key={i}
-                className={`w-4 h-4 ${i < Math.floor(rating) ? "fill-accent text-accent" : "text-gray-600"}`}
+                className={`w-4 h-4 ${i < Math.floor(rating) ? "fill-orange-500 text-orange-500" : "text-orange-500"}`}
               />
             ))}
           </div>
