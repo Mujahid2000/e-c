@@ -104,6 +104,7 @@ export default function AdminPage() {
         price: Number.parseFloat(formData.price),
         category: formData.category,
         inventory: Number.parseInt(formData.inventory),
+        image: formData.image,
       }
 
       if (editingId) {
