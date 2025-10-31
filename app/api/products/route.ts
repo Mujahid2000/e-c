@@ -50,7 +50,7 @@ export async function POST(request: NextRequest) {
 
     // Validate required fields
     const {name, slug, description, price, category, inventory, image} = body
-console.log(name, slug, description, price, category, inventory, image)
+
     if (!name || !slug || !description || price === undefined || !category || !image) {
       return NextResponse.json({ success: false, error: "Missing required fields" }, { status: 400 })
     }

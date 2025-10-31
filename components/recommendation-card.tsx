@@ -3,7 +3,7 @@
 import Link from "next/link"
 import { Star, Heart } from "lucide-react"
 import { useState } from "react"
-import Image from "next/image"
+
 
 interface RecommendationCardProps {
     product: {
@@ -19,27 +19,21 @@ interface RecommendationCardProps {
   badge?: string
 }
 
-export default function RecommendationCard({ product, badge }: RecommendationCardProps) {
+export default function RecommendationCard({ product }: RecommendationCardProps) {
   const [isWishlisted, setIsWishlisted] = useState(false)
 
   return (
     <Link href={`/products/${product.slug}`}>
-      <div className="card-base cursor-pointer group h-full flex flex-col">
+      <div className="card-base cursor-pointer  h-full flex flex-col">
         {/* Image Container */}
         <div className="relative h-64 mb-4 overflow-hidden rounded-lg bg-gray-100 flex-shrink-0">
           <img
             src={product.image || "/placeholder.svg"}
             alt={product.name}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            className="w-full h-full object-cover transition-transform duration-300"
           />
 
-          {/* Badge */}
-          {badge && (
-            <div className="absolute top-3 left-3 bg-accent text-primary px-3 py-1 rounded-full text-xs font-bold">
-              {badge}
-            </div>
-          )}
-
+      
           {/* Wishlist Button */}
           <button
             onClick={(e) => {
@@ -61,7 +55,7 @@ export default function RecommendationCard({ product, badge }: RecommendationCar
 
         {/* Content */}
         <div className="flex-1 flex flex-col">
-          <h3 className="font-semibold text-lg mb-2 line-clamp-2 group-hover:text-accent transition-colors">
+          <h3 className="font-semibold text-lg mb-2 line-clamp-2 text-black transition-colors">
             {product.name}
           </h3>
 
@@ -71,17 +65,17 @@ export default function RecommendationCard({ product, badge }: RecommendationCar
               {[...Array(5)].map((_, i) => (
                 <Star
                   key={i}
-                  className={`w-4 h-4 ${i < Math.floor(product.rating) ? "fill-accent text-accent" : "text-gray-300"}`}
+                  className={`w-4 h-4 ${i < Math.floor(product.rating) ? "fill-orange-600 text-orange-500" : "text-black"}`}
                 />
               ))}
             </div>
             <span className="text-sm font-semibold">{product.rating}</span>
-            <span className="text-xs text-text-muted">({product.reviews})</span>
+            <span className="text-xs text-black">({product.reviews})</span>
           </div>
 
           {/* Price and Button */}
           <div className="flex justify-between items-center mt-auto pt-4 border-t border-border">
-            <span className="text-2xl font-bold text-accent">${product.price.toFixed(2)}</span>
+            <span className="text-2xl font-bold text-black">${product.price.toFixed(2)}</span>
             <button
               onClick={(e) => {
                 e.preventDefault()
@@ -90,7 +84,7 @@ export default function RecommendationCard({ product, badge }: RecommendationCar
               className={`px-4 py-2 rounded-lg font-medium transition-colors ${
                 product.inventory > 0
                   ? "bg-primary text-primary-foreground hover:bg-primary-light"
-                  : "bg-gray-300 text-gray-500 cursor-not-allowed"
+                  : "bg-black text-black cursor-not-allowed"
               }`}
             >
               {product.inventory > 0 ? "Add" : "Out"}

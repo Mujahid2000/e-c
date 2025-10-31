@@ -131,8 +131,8 @@ export default async function ProductPage({ params }: ProductPageProps) {
                       key={i}
                       className={`w-5 h-5 ${
                         i < Math.floor(product.rating)
-                          ? "fill-accent text-accent"
-                          : "text-gray-300"
+                          ? "fill-orange-500 text-accent"
+                          : "text-orange-500"
                       }`}
                     />
                   ))}
@@ -145,7 +145,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
               {/* Price */}
               <div className="mb-6">
-                <span className="text-5xl font-bold text-accent">
+                <span className="text-5xl font-bold text-black">
                   ${product.price.toFixed(2)}
                 </span>
               </div>
